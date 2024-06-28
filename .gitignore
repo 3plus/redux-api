@@ -1,8 +1,8 @@
 node_modules
 npm-debug.log
 coverage/
-bower_components
 /lib
+/dist
 .DS_Store
 
 #Webstorm metadata
@@ -13,4 +13,3 @@ bower_components
 
 #IntelliJ metadata
 *.iml
-/.nyc_output

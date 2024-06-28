@@ -95,7 +95,7 @@ export default function reduxApi(config, baseConfig) {
       /* eslint no-console: 0 */
       console.warn(
         "Deprecated `broadcast` option. you shoud use `events`" +
-          "to catch redux-api events (see https://github.com/lexich/redux-api/blob/master/DOCS.md#Events)"
+          "to catch redux-api events (see https://github.com/3plus/redux-api/blob/master/DOCS.md#Events)"
       );
     }
 

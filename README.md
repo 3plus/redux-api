@@ -1,10 +1,6 @@
 ### Redux-api
 Flux REST API for redux infrastructure
 
-[![Build Status](https://travis-ci.org/lexich/redux-api.svg)](https://travis-ci.org/lexich/redux-api)
-[![NPM version](https://badge.fury.io/js/redux-api.svg)](http://badge.fury.io/js/redux-api)
-[![Coverage Status](https://coveralls.io/repos/lexich/redux-api/badge.png?branch=master)](https://coveralls.io/r/lexich/redux-api?branch=master)
-
 ## Introduction
 `redux-api` solves the problem of writing clients to communicate with backends. It generates [actions](http://redux.js.org/docs/basics/Actions.html) and [reducers](http://redux.js.org/docs/basics/Reducers.html) for making AJAX calls to API endpoints. You don't need to write a lot of [boilerplate code](http://redux.js.org/docs/advanced/ExampleRedditAPI.html) if you use `redux` and want to exchange data with server.
 
@@ -20,22 +16,7 @@ See [DOCS.md](docs/DOCS.md) for API documentation.
 ## Install
 With npm:
 ```sh
-npm install redux-api --save
-```
-With bower:
-```sh
-bower install redux-api --save
-```
-
-If you don't use tools like webpack, browserify, etc and you want to load redux-api manually, the best way to add redux-api to your project is:
-```js
-<script src="(...)/redux-api.min.js"></script>
-<script>
-  window.ReduxApi = window["redux-api"];
-  // or
-  var ReduxApi = window["redux-api"];
-  // initialization code
-</script>
+npm install @3plus/redux-api --save
 ```
 
 =======
@@ -64,15 +45,13 @@ And of course you have to set up adapter to your `redux-api` instance before usi
 ```
 
 =======
-## Examples
-[examples/isomorphic](https://github.com/lexich/redux-api/tree/master/examples/isomorphic) - React + Redux + React-Router + Redux-api with webpack and express + github API
 
 ### Example
 rest.js
 ```js
 import "isomorphic-fetch";
-import reduxApi, {transformers} from "redux-api";
-import adapterFetch from "redux-api/lib/adapters/fetch";
+import reduxApi, {transformers} from "@3plus/redux-api";
+import adapterFetch from "@3plus/redux-api/lib/adapters/fetch";
 export default reduxApi({
   // simple endpoint description
   entry: `/api/v1/entry/:id`,
@@ -151,5 +130,3 @@ React.render(
   document.getElementById("content")
 );
 ```
-
-### [Releases Changelog](https://github.com/lexich/redux-api/releases)

@@ -2,7 +2,7 @@
 ### Initialization redux-api endpoint
 
 ```js
-import reduxApi, {transformers} from "redux-api";
+import reduxApi, {transformers} from "@3plus/redux-api";
 ```
 
 #### reduxApi(options, baseConfig)
@@ -338,7 +338,7 @@ In this case you global state is look like this:
 - **Type**: String
 - **Example**:
 ```js
-import reduxApi, {transformers} from "redux-api";
+import reduxApi, {transformers} from "@3plus/redux-api";
 const rest = reduxApi({
   getUser: {
     reducerName: "user"
@@ -440,13 +440,13 @@ rest.actions.test.delete({ id: 1 });
 - **Description**: backend adapter. In current example we use `adaptersFetch` adapter for rest backend using `fetch` API for rest [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch)
 - **Example**:
 ```js
-import adapterFetch from "redux-api/lib/adapters/fetch";
+import adapterFetch from "@3plus/redux-api/lib/adapters/fetch";
 const rest = reduxApi({...});
 rest.use("fetch", adapterFetch(fetch));
 ```
 
 #### server
-- **Description**: redux api is isomorphic compatible see [examples/isomorphic](https://github.com/lexich/redux-api/tree/master/examples/isomorphic) By default `server===false` for client-size mode. If `server===true` redux-api works in server-size mode.
+- **Description**: redux api is isomorphic compatible. By default `server===false` for client-size mode. If `server===true` redux-api works in server-size mode.
 - **Default** false
 ```js
 const rest = reduxApi({...});
@@ -540,14 +540,14 @@ reduxApi({ ... }).use("responseHandler",
 - **Description**: `reduxApi` initializer returns not initialized object. You need to call `init` for initialize it.
 - **Type**: Function
 - **Param** **adapter** - backend adapter. In current example we use `adaptersFetch` adapter for rest backend using `fetch` API for rest [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch)
-- **Param** **isServer** - redux api is isomorphic compatible see   [examples/isomorphic](https://github.com/lexich/redux-api/tree/master/examples/isomorphic) By default `isServer===false` for client-size mode. If `isServer===true` redux-api works in server-size mode.
+- **Param** **isServer** - redux api is isomorphic compatible. By default `isServer===false` for client-size mode. If `isServer===true` redux-api works in server-size mode.
 - **Param** **rootUrl** - root url for every endpoint. very usefull for isomorphic(universal) app. For client-side use default rootUrl, and for backend use http://localhost:80 for example. For client-side for request `/api/get` will be `/api/get` and for backend will be `http://localhost:80/api/get`.
 - **Example**:
 
 ```js
 import "isomorphic-fetch";
-import reduxApi from "redux-api";
-import adapterFetch from "redux-api/lib/adapters/fetch";
+import reduxApi from "@3plus/redux-api";
+import adapterFetch from "@3plus/redux-api/lib/adapters/fetch";
 const rest = reduxApi({
   ... //config
 });
@@ -704,7 +704,7 @@ function accessReducer(state=initialState, action) {
 - **Description**: helps to organize chain call of actions
 - **Example**:
 ```js
-import reduxApi, { async } from "redux-api";
+import reduxApi, { async } from "@3plus/redux-api";
 const rest = reduxApi({
   test: "/api/test",
   test2: "/api/test2",
@@ -718,7 +718,7 @@ async(dispatch,
 
 ### Store state schema
 ```js
-import reduxApi from "redux-api";
+import reduxApi from "@3plus/redux-api";
 
 const rest = reduxApi({
   user: "/user/1"
