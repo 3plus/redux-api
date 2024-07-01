@@ -175,7 +175,6 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
         return Promise.reject("isLoading");
       }
       const requestOptions = { pathvars, params };
-      const prevData = get(state, meta.prefix, meta.reducerName, "data");
       dispatch({ type: actionFetch, syncing, request: requestOptions });
       const fetchResolverOpts = {
         dispatch,
@@ -214,6 +213,7 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
           }).then(
             d => {
               requestHolder.pop();
+              const prevData = get(state, meta.prefix, meta.reducerName, "data");
               const data = meta.transformer(d, prevData, {
                 type: actionSuccess,
                 request: requestOptions
