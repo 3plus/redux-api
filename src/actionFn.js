@@ -224,7 +224,7 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
               const data = meta.transformer(d, prevData, {
                 type: actionSuccess,
                 request: requestOptions
-              });
+              }, getState);
               dispatch({
                 data,
                 origData: d,
