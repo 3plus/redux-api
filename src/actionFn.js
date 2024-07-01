@@ -206,7 +206,7 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
             requestHolder.set({
               resolve,
               reject,
-              promise: request(pathvars, params, {}, getState, dispatch).then(
+              promise: request(pathvars, params, fetchResolverOpts.request, getState, dispatch).then(
                 resolve,
                 reject
               )
