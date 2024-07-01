@@ -93,7 +93,7 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
         return Promise.resolve(data);
       }
     }
-    const response = meta.fetch(urlT, opts);
+    const response = meta.fetch(urlT, opts, options);
     if (cacheManager && dispatch !== none && id) {
       response.then(data => {
         dispatch({ type: actionCache, id, data, expire: cacheManager.expire });
