@@ -198,6 +198,13 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
       const result = new Promise((done, fail) => {
         fetchResolver(0, fetchResolverOpts, err => {
           if (err) {
+            dispatch({
+              error: err,
+              type: actionFail,
+              loading: false,
+              syncing: false,
+              request: requestOptions
+            });
             pubsub.reject(err);
             return fail(err);
           }
