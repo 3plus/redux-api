@@ -172,7 +172,7 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
       const state = getState();
       const isLoading = get(state, meta.prefix, meta.reducerName, "loading");
       if (isLoading) {
-        return Promise.reject("isLoading");
+        return Promise.reject("isLoading-" + meta.prefix + "-" + meta.reducerName);
       }
       const requestOptions = { pathvars, params };
       dispatch({ type: actionFetch, syncing, request: requestOptions });
