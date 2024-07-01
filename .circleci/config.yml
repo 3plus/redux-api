@@ -1,0 +1,35 @@
+version: 2.1
+
+jobs:
+  publish:
+    docker:
+      - image: cimg/node:16.20.2
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Install
+          command: |
+            yarn install
+      - run:
+          name: Build
+          command: |
+            yarn build
+      - run:
+          name: Authenticate
+          command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+      - run:
+          name: Publish
+          command: |
+            npm publish --access public
+workflows:
+  publish-npm-package:
+    jobs:
+      - publish:
+          name: Publish package
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
