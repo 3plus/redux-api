@@ -64,12 +64,12 @@ export default function reducerFn(initialState, actions = {}, reducer) {
           error: action.error
         };
       case actionCache:
-        const { id, data } = action;
+        const { id, data, persisted } = action;
         const cacheExpire = state.cache[id] ? state.cache[id].expire : null;
         const expire = setExpire(action.expire, cacheExpire);
         return {
           ...state,
-          cache: { ...state.cache, [id]: { expire, data } }
+          cache: { ...state.cache, [id]: { expire, data, persisted } }
         };
       default:
         return reducer ? reducer(state, action) : state;

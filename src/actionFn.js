@@ -90,6 +90,12 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
         cache && id && cache[id] !== undefined && cache[id]
       );
       if (data !== undefined) {
+        if(cache[id].persisted) {
+          Object.defineProperty(data, 'persisted', { value: true });
+          // expire persisted cache immediately after consumption
+          // because we will try to reload and persist new data
+          cache[id].expire = true;
+        }
         return Promise.resolve(data);
       }
     }
@@ -256,6 +262,10 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
               }
               pubsub.resolve(data);
               done(data);
+              // special case where we will try to relaod data if persisted cache is consumed
+              if(d && d.persisted && meta.cache && meta.cache.reloadPersisted) {
+                fn.force(...args)(dispatch, getState);
+              }
             },
             error => {
               dispatch({
