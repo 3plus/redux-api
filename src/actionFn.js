@@ -90,8 +90,8 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
         cache && id && cache[id] !== undefined && cache[id]
       );
       if (data !== undefined) {
-        if(cache[id].persisted) {
-          Object.defineProperty(data, 'persisted', { value: true });
+        if (cache[id].persisted) {
+          Object.defineProperty(data, "persisted", { value: true });
           // expire persisted cache immediately after consumption
           // because we will try to reload and persist new data
           cache[id].expire = true;
@@ -133,9 +133,9 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
       ? response
       : response.then(
           data =>
-            new Promise((resolve, reject) =>
-              meta.validation(data, err => (err ? reject(err) : resolve(data)))
-            )
+            new Promise((resolve, reject) => {
+              meta.validation(data, err => (err ? reject(err) : resolve(data)));
+            })
         );
     let ret = result;
     const responseHandler = get(meta, "holder", "responseHandler");
@@ -178,7 +178,9 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
       const state = getState();
       const isLoading = get(state, meta.prefix, meta.reducerName, "loading");
       if (isLoading) {
-        return Promise.reject("isLoading-" + meta.prefix + "-" + meta.reducerName);
+        return Promise.reject(
+          "isLoading-" + meta.prefix + "-" + meta.reducerName
+        );
       }
       const requestOptions = { pathvars, params };
       dispatch({ type: actionFetch, syncing, request: requestOptions });
@@ -218,19 +220,32 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
             requestHolder.set({
               resolve,
               reject,
-              promise: request(pathvars, params, fetchResolverOpts.request, getState, dispatch).then(
-                resolve,
-                reject
-              )
+              promise: request(
+                pathvars,
+                params,
+                fetchResolverOpts.request,
+                getState,
+                dispatch
+              ).then(resolve, reject)
             });
           }).then(
             d => {
               requestHolder.pop();
-              const prevData = get(state, meta.prefix, meta.reducerName, "data");
-              const data = meta.transformer(d, prevData, {
-                type: actionSuccess,
-                request: requestOptions
-              }, getState);
+              const prevData = get(
+                state,
+                meta.prefix,
+                meta.reducerName,
+                "data"
+              );
+              const data = meta.transformer(
+                d,
+                prevData,
+                {
+                  type: actionSuccess,
+                  request: requestOptions
+                },
+                getState
+              );
               dispatch({
                 data,
                 origData: d,
@@ -263,7 +278,12 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
               pubsub.resolve(data);
               done(data);
               // special case where we will try to relaod data if persisted cache is consumed
-              if(d && d.persisted && meta.cache && meta.cache.reloadPersisted) {
+              if (
+                d &&
+                d.persisted &&
+                meta.cache &&
+                meta.cache.reloadPersisted
+              ) {
                 fn.force(...args)(dispatch, getState);
               }
             },
