@@ -13,37 +13,47 @@
   "scripts": {
     "test": "npm run eslint && npm run mocha",
     "mocha": "node_modules/.bin/mocha --require @babel/register test/*_spec.js",
-    "build": "node_modules/.bin/babel src --out-dir lib --source-maps true",
-    "eslint": "node_modules/.bin/eslint src test",
-    "prettier": "prettier --write \"{src,test/isomorphic/app}/**/*.{js,jsx}\"",
-    "precommit": "npm run prettier && npm test"
+    "build": "node_modules/.bin/babel src --out-dir lib --delete-dir-on-start --verbose",
+    "lint": "eslint --quiet ./src",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier:fix": "prettier --write './src/**/*.js'",
+    "prettier:check": "prettier --check './src/**/*.js'",
+    "prepare": "husky"
   },
   "dependencies": {
     "fast-apply": "0.0.3",
-    "qs": "^6.9.1"
+    "qs": "^6.9.2",
+    "url": "^0.11.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
+    "@babel/eslint-parser": "^7.24.7",
     "@babel/preset-env": "^7.8.4",
-    "@babel/preset-react": "^7.8.3",
-    "@babel/register": "^7.8.3",
-    "babel-eslint": "10.0.3",
-    "babel-loader": "8.0.6",
-    "babel-plugin-add-module-exports": "1.0.2",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-add-module-exports": "^1.0.4",
     "chai": "4.2.0",
-    "cross-env": "7.0.0",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb": "18.0.1",
-    "eslint-config-prettier": "6.10.0",
-    "eslint-plugin-import": "2.20.1",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.18.3",
-    "lodash": "4.17.15",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-jsx-a11y": "6.9.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.7",
+    "lodash": "4.17.21",
     "mocha": "7.0.1",
     "prettier": "1.19.1",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{md,json}": [
+      "prettier --write"
+    ]
   }
 }

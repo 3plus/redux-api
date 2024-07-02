@@ -1,9 +1,6 @@
 {
-  "extends": [
-    "airbnb",
-    "prettier"
-  ],
-  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier"],
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true,
     "node": true
@@ -11,11 +8,9 @@
   "rules": {
     "prefer-promise-reject-errors": "off",
     "prefer-destructuring": "off",
-    "no-multi-spaces": 0,
+    "default-param-last": "off",
     "space-infix-ops": 0,
-    "quotes": [
-      2, "double", "avoid-escape"    // http://eslint.org/docs/rules/quotes
-    ],
+    "quotes": [2, "double", "avoid-escape"],
     "func-names": 0,
     "vars-on-top": 0,
     "strict": 0,
@@ -34,13 +29,12 @@
     "comma-dangle": 0,
     "space-before-function-paren": 0,
     "arrow-spacing": [2, { "before": true, "after": true }],
-    "arrow-parens":  [2, "as-needed"],
+    "arrow-parens": [2, "as-needed"],
     "prefer-template": 0,
     "prefer-arrow-callback": 0,
     "arrow-body-style": 0,
     "no-confusing-arrow": 0,
-    "react/require-extension": 0,
     "import/no-unresolved": 0,
-    "import/extentions": 0,
+    "import/extentions": 0
   }
 }

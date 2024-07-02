@@ -1,15 +1,32 @@
-node_modules
-npm-debug.log
-coverage/
-/lib
-/dist
+# OSX
+#
 .DS_Store
 
-#Webstorm metadata
-.idea
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/patches
+package-lock.json
+.pnp.*
 
-#VSCode metadata
-.vscode
+# Visual Studio Code
+#
+.history
+.vscode/*
+!.vscode/settings.json
 
-#IntelliJ metadata
-*.iml
+# Test
+#
+coverage/*
+jest/*
+
+# Other
+#
+dist/
+docs/
+lib/

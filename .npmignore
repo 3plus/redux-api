@@ -9,4 +9,7 @@
 .eslintrc
 .gitignore
 .tool-versions
+.prettierrc
+.vscode
+.husky
 yarn.lock

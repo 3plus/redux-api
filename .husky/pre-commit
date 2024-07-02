@@ -1,0 +1,4 @@
+# set path to enable SourceTree on MacOS
+PATH=$PATH:/usr/local/bin:/usr/local/sbin
+
+npx lint-staged
