@@ -21,7 +21,6 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "fast-apply": "0.0.3",
     "qs": "^6.9.2"
   },
   "devDependencies": {

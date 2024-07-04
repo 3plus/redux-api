@@ -1,6 +1,5 @@
 "use strict";
 
-import fastApply from "fast-apply";
 import urlTransform from "./urlTransform";
 import merge from "./utils/merge";
 import get from "./utils/get";
@@ -384,8 +383,7 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
     memo[helpername] = (...args) => (dispatch, getState) => {
       const index = args.length - 1;
       const callbackFn = args[index] instanceof Function ? args[index] : none;
-      const helpersResult = fastApply(
-        call,
+      const helpersResult = call.apply(
         { getState, dispatch, actions: meta.actions },
         args
       );
@@ -400,20 +398,16 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
             if (error) {
               callback(error);
             } else {
-              fastApply(
-                sync ? fn.sync : fn,
-                null,
-                newArgs.concat(callback)
-              )(dispatch, getState);
+              (sync ? fn.sync : fn)(...newArgs.concat(callback))(
+                dispatch,
+                getState
+              );
             }
           });
         } else {
           // if helper alias is synchronous
           const [pathvars, params] = helpersResult;
-          fastApply(sync ? fn.sync : fn, null, [pathvars, params, callback])(
-            dispatch,
-            getState
-          );
+          (sync ? fn.sync : fn)(pathvars, params, callback)(dispatch, getState);
         }
       });
       result.catch(none);
