@@ -5,9 +5,9 @@
 import reducerFn from "./reducerFn";
 import actionFn from "./actionFn";
 import transformers from "./transformers";
-import async from "./async";
 import cacheManager from "./utils/cache";
-// export { transformers, async };
+
+export { transformers };
 
 /**
  * Default configuration for each endpoint
@@ -171,6 +171,3 @@ export default function reduxApi(config, baseConfig) {
     cfg
   );
 }
-
-reduxApi.transformers = transformers;
-reduxApi.async = async;
