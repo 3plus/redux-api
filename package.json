@@ -22,8 +22,7 @@
   },
   "dependencies": {
     "fast-apply": "0.0.3",
-    "qs": "^6.9.2",
-    "url": "^0.11.3"
+    "qs": "^6.9.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

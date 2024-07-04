@@ -1,7 +1,6 @@
 "use strict";
 
 import fastApply from "fast-apply";
-import libUrl from "url";
 import urlTransform from "./urlTransform";
 import merge from "./utils/merge";
 import get from "./utils/get";
@@ -57,13 +56,20 @@ export default function actionFn(url, name, options, ACTIONS = {}, meta = {}) {
       ? rootUrl
       : rootUrl(urlT, params, getState);
     if (rootUrl) {
-      const rootUrlObject = libUrl.parse(rootUrl);
-      const urlObject = libUrl.parse(urlT);
+      let urlObject = {};
+      try {
+        urlObject = new URL(urlT);
+      } catch (error) {
+        urlObject = { pathname: urlT };
+      }
+      const rootUrlObject = new URL(rootUrl);
       if (!urlObject.host) {
         const urlPath =
-          (rootUrlObject.path ? rootUrlObject.path.replace(/\/$/, "") : "") +
+          (rootUrlObject.pathname
+            ? rootUrlObject.pathname.replace(/\/$/, "")
+            : "") +
           "/" +
-          (urlObject.path ? urlObject.path.replace(/^\//, "") : "");
+          (urlObject.pathname ? urlObject.pathname.replace(/^\//, "") : "");
         urlT = `${rootUrlObject.protocol}//${rootUrlObject.host}${urlPath}`;
       }
     }

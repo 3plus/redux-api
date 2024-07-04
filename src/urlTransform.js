@@ -1,7 +1,6 @@
 "use strict";
 
 import qs from "qs";
-import { parse } from "url";
 import omit from "./utils/omit";
 import merge from "./utils/merge";
 
@@ -34,10 +33,15 @@ export default function urlTransform(url, params, options) {
   if (!urlWithParams) {
     return urlWithParams;
   }
-  const { protocol, host, path } = parse(urlWithParams);
+  let protocol, host, pathname;
+  try {
+    ({ protocol, host, pathname } = new URL(urlWithParams));
+  } catch (error) {
+    ({ protocol, host, pathname } = { pathname: urlWithParams });
+  }
   const cleanURL = host
-    ? `${protocol}//${host}${path.replace(rxClean, "")}`
-    : path.replace(rxClean, "");
+    ? `${protocol}//${host}${pathname.replace(rxClean, "")}`
+    : pathname.replace(rxClean, "");
   const usedKeysArray = Object.keys(usedKeys);
   if (usedKeysArray.length !== Object.keys(params).length) {
     const urlObject = cleanURL.split("?");
