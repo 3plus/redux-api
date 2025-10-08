@@ -1,6 +1,6 @@
 "use strict";
 
-import qs from "qs";
+import * as qs from "qs";
 import omit from "./utils/omit";
 import merge from "./utils/merge";
 
