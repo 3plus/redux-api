@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   publish:
     docker:
-      - image: cimg/node:18.20.3
+      - image: cimg/node:24.16.0
     resource_class: small
     steps:
       - checkout
@@ -16,12 +16,9 @@ jobs:
           command: |
             yarn build
       - run:
-          name: Authenticate
+          name: Publish with NPM Trusted Publishing
           command: |
-            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-      - run:
-          name: Publish
-          command: |
+            export NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
             npm publish --access public
 workflows:
   publish-npm-package:
